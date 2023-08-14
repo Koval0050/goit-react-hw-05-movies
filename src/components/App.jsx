@@ -1,16 +1,45 @@
+import React, { lazy, Suspense } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import './style.css';
+import { Grid } from 'react-loader-spinner';
+
+const Home = lazy(() => import('./pages/Home'));
+const Movies = lazy(() => import('./pages/Movies'));
+const Layout = lazy(() => import('./layouts/Layout'));
+const MovieDetail = lazy(() => import('./movieDetail/MovieDetail'));
+const Cast = lazy(() => import('./Cast/Cast'));
+const Reviews = lazy(() => import('./Reviews/Reviews'));
+const NotFound = lazy(() => import('./movieDetail/NotFound'));
+
 export const App = () => {
+  const loader = (
+    <Grid
+      height="80"
+      width="80"
+      color="#4fa94d"
+      ariaLabel="grid-loading"
+      radius="12.5"
+      wrapperStyle={{}}
+      wrapperClass="loader"
+      visible={true}
+    />
+  );
+
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
+    <div>
+      <Suspense fallback={loader}>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="movies" element={<Movies />} />
+            <Route path="moviedetail/:movieId" element={<MovieDetail />}>
+              <Route path="cast" element={<Cast />} />
+              <Route path="reviews" element={<Reviews />} />
+            </Route>
+            <Route path="*" element={<NotFound />} />
+          </Route>
+        </Routes>
+      </Suspense>
     </div>
   );
 };
