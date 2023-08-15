@@ -7,7 +7,7 @@ const Movies = () => {
 
   useEffect(() => {
     const fetchMovies = async () => {
-      if (searchQuery !== '') {
+      if (searchQuery.trim() !== '') {
         const { results } = await getMoviesByQuery(searchQuery);
         setSearchMovie(results);
       }
@@ -22,7 +22,6 @@ const Movies = () => {
 
   const submitQuery = async e => {
     e.preventDefault();
-    // Fetching movies inside the useEffect now, no need to fetch them here.
   };
 
   return (
