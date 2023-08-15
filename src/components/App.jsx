@@ -6,7 +6,7 @@ import { Grid } from 'react-loader-spinner';
 const Home = lazy(() => import('./Pages/Home'));
 const Movies = lazy(() => import('./Pages/Movies'));
 const Layout = lazy(() => import('./Layouts/Layout'));
-// const MovieDetail = lazy(() => import('./MovieDetail/MovieDetail.jsx'));
+const MovieDetails = lazy(() => import('./MovieDetail/MovieDetails.jsx'));
 const Cast = lazy(() => import('./Cast/Cast'));
 const Reviews = lazy(() => import('./Reviews/Reviews'));
 
@@ -31,10 +31,10 @@ export const App = () => {
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="movies" element={<Movies />} />
-            {/* <Route path="movies/:movieId" element={<MovieDetail />}> */}
+            <Route path="movies/:movieId" element={<MovieDetails />}>
               <Route path="cast" element={<Cast />} />
               <Route path="reviews" element={<Reviews />} />
-            {/* </Route> */}
+            </Route>
           </Route>
         </Routes>
       </Suspense>
