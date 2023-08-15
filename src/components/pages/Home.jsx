@@ -3,7 +3,7 @@ import { getPopularMovies } from '../../api/api';
 import { useEffect, useState } from 'react'; // Import useState
 import { Link } from 'react-router-dom';
 
- const MovieLink = styled(Link)`
+const MovieLink = styled(Link)`
   text-decoration: none;
   color: black;
 `;
@@ -12,24 +12,24 @@ const Home = () => {
   const [movieList, setMovieList] = useState([]); // Use state to store the movie list
 
   useEffect(() => {
+    const getData = async () => {
+      try {
+        const result = await getPopularMovies();
+        setMovieList(result.results); // Update the movie list using setMovieList
+      } catch (error) {
+        console.error('Error fetching movies:', error);
+      }
+    };
     getData();
   }, [movieList]);
 
-  const getData = async () => {
-    try {
-      const result = await getPopularMovies();
-      setMovieList(result.results); // Update the movie list using setMovieList
-    } catch (error) {
-      console.error('Error fetching movies:', error);
-    }
-  };
   return (
     <>
       <h1 className="trending">Trending today</h1>
       <ul className="movie-list">
         {movieList.map(movie => (
           <li key={movie.id} className="movie-card">
-            <MovieLink to={`moviedetail/${movie.id}`} state={{ from: '123' }}>
+            <MovieLink to={`movies/${movie.id}`}>
               <img
                 className="movie-img"
                 src={
