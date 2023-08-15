@@ -6,7 +6,7 @@ import { Grid } from 'react-loader-spinner';
 const Home = lazy(() => import('./Pages/Home'));
 const Movies = lazy(() => import('./Pages/Movies'));
 const Layout = lazy(() => import('./Layouts/Layout'));
-const MovieDetail = lazy(() => import('./MovieDetail/MovieDetail'));
+const MovieDetail = lazy(() => import('./MovieDetail/MovieDetail.jsx'));
 const Cast = lazy(() => import('./Cast/Cast'));
 const Reviews = lazy(() => import('./Reviews/Reviews'));
 
