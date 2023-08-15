@@ -5,7 +5,7 @@ import { Grid } from 'react-loader-spinner';
 
 const Home = lazy(() => import('./Pages/Home'));
 const Movies = lazy(() => import('./Pages/Movies'));
-const Layout = lazy(() => import('./Layouts/Layout'));
+const HeaderLayout = lazy(() => import('./Layouts/HeaderLayout'));
 const MovieDetails = lazy(() => import('./MovieDetail/MovieDetails.jsx'));
 const Cast = lazy(() => import('./Cast/Cast'));
 const Reviews = lazy(() => import('./Reviews/Reviews'));
@@ -28,7 +28,7 @@ export const App = () => {
     <div>
       <Suspense fallback={loader}>
         <Routes>
-          <Route path="/" element={<Layout />}>
+          <Route path="/" element={<HeaderLayout />}>
             <Route index element={<Home />} />
             <Route path="movies" element={<Movies />} />
             <Route path="movies/:movieId" element={<MovieDetails />}>
