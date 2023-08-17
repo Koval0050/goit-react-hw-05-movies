@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getMoviesByQuery } from 'api/api';
+import { useSearchParams } from 'react-router-dom';
 
 const Movies = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchMovie, setSearchMovie] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -18,11 +20,19 @@ const Movies = () => {
 
   const handleInput = value => {
     setSearchQuery(value);
+    setSearchParams({ query: value }); // Оновити параметр запиту у URL
   };
 
-  const submitQuery = async e => {
+  const submitQuery = e => {
     e.preventDefault();
   };
+
+  const queryParams = new URLSearchParams(searchParams);
+  const queryFromURL = queryParams.get('query') || '';
+
+  useEffect(() => {
+    setSearchQuery(queryFromURL);
+  }, [queryFromURL]);
 
   return (
     <div>
